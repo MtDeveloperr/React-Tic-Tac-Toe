@@ -1,19 +1,6 @@
 import React from "react";
 
-const initialGameBoard = [
-    [null, null, null],
-    [null, null, null],
-    [null, null, null]
-];
-
-export default function GameBoard({turns, changeTurn}){ 
-    let gameBoard = initialGameBoard;
-    console.log("GameBoard calisti");
-    for(let i = 0; i < turns.length; i++){
-         const {squeare, player} = turns[i];
-         const {row, col} = squeare;
-         gameBoard[row][col] = player;
-    }
+export default function GameBoard({board, changeTurn}){ 
     // const [stituationGameBoard, setSituationGameBoard] = useState(initialGameBoard);
     
     //  useEffect(() => {
@@ -75,11 +62,11 @@ export default function GameBoard({turns, changeTurn}){
     // }
 
     return <ol id="game-board">
-            {gameBoard.map((row, rowIndex) =><li key={rowIndex}>
+            {board.map((row, rowIndex) =><li key={rowIndex}>
                 <ol>
                     {row.map((symbol,colIndex) => 
                     <li key={colIndex}>
-                        <button onClick={()=>changeTurn(rowIndex,colIndex)}>{symbol}</button>
+                        <button onClick={()=>changeTurn(rowIndex,colIndex)} disabled={symbol != null}>{symbol}</button>
                     </li>)}
                 </ol>
             </li>)}
